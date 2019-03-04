@@ -12,3 +12,9 @@ html {
         background-color: #FBF9F9;
     }
 }
+
+.o-button-rounded {
+    .mat-raised-button {
+        border-radius: 20px;
+    }
+}

@@ -9,6 +9,36 @@
                 <img src="../../../assets/icons/user.svg" />
             </div>
             <span class="welcome">Welcome.</span>
+            <div *ngIf="view == ''" class="buttons o-button-rounded" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="40px">
+                <button mat-raised-button class="login" (click)="view = 'login'">Login</button>
+                <button mat-raised-button class="register" (click)="view = 'register'">Register</button>
+            </div>
+            <div *ngIf="view !== ''" class="view-exit">
+                <i class="material-icons" (click)="view = ''">keyboard_backspace</i>
+            </div>
+            <form *ngIf="view === 'login'" #loginForm="ngForm" class="login-form o-button-rounded" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+                <mat-form-field>
+                    <input matInput placeholder="Username" required [formControl]="username" />
+                    <mat-error *ngIf="username.invalid">Please enter your username</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Password" required [type]="hide ? 'password' : 'text'" [formControl]="password" />
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="password.invalid">Please enter your password</mat-error>
+                </mat-form-field>
+                <button mat-raised-button class="login" [disabled]="!loginForm.form.valid">Login</button>
+            </form>
+            <form *ngIf="view === 'register'"class="loginForm" fxLayout="column">
+                <mat-form-field>
+                    <input matInput placeholder="Username" [formControl]="username" />
+                    <mat-error *ngIf="username.invalid">Please enter your username</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" [formControl]="password" />
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="password.invalid">Please enter your password</mat-error>
+                </mat-form-field>
+            </form>
         </div>
     </mat-card>
 </div>
